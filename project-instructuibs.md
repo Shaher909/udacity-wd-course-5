@@ -26,26 +26,26 @@ The following are just some of the questions that you’ll experience along the 
 
 ## Development Strategy
 
-- Duplicate code from project #3 (as a starting point)
-- Get webpack set up to work with this project
-  -- your stylesheets should be .scss files
-  -- server should access `dist` directory
-  -- index.js should import the main function, and import your scss files.
-- Setup `package.json` file with the necessary scripts to test, dev, start and build.
-- Create an account: https://www.geonames.org/export/web-services.html
-- Replace the openweather api with geonames api
-- Introduce a countdown.
-  -- What type of input should it be? What about cross browser rendering?
-  -- We’re looking to see how soon the trip is, how can you get the information from the DOM and see how soon that date is?
-  -- Where should you be storing that data once you have it?
-- Create an account: https://www.weatherbit.io/account/create
-- Integrate the Weatherbit API similarly to how you integrated the geoname api.
-- Create an account: https://pixabay.com/api/docs/
-- Integrate the Pixabay API similarly to how you integrated the Geoname/Weatherbit APIs. (Choose one of the items from the suggested list to add in. The items vary in complexity, but you must choose at least 1, all others are optional.)
-- Pull in an image for the country from Pixabay API when the entered location brings up no results (good for obscure localities).
-- Allow the user to remove the trip.
-- Use Local Storage(opens in a new tab) to save the data so that when they close, then revisit the page, their information is still there.
-- Add in services workers. Refer to project 4 for guidance.
+#1 - Duplicate code from project #3 (as a starting point)
+#2 - Get webpack set up to work with this project
+-- your stylesheets should be .scss files
+-- server should access `dist` directory
+-- index.js should import the main function, and import your scss files.
+#3 - Setup `package.json` file with the necessary scripts to test, dev, start and build.
+#4 - Create an account: https://www.geonames.org/export/web-services.html
+#5 - Replace the openweather api with geonames api
+#6 - Introduce a countdown.
+-- What type of input should it be? What about cross browser rendering?
+-- We’re looking to see how soon the trip is, how can you get the information from the DOM and see how soon that date is?
+-- Where should you be storing that data once you have it?
+#7 - Create an account: https://www.weatherbit.io/account/create
+#8 - Integrate the Weatherbit API similarly to how you integrated the geoname api.
+#8 - Create an account: https://pixabay.com/api/docs/
+#9 - Integrate the Pixabay API similarly to how you integrated the Geoname/Weatherbit APIs. (Choose one of the items from the suggested list to add in. The items vary in complexity, but you must choose at least 1, all others are optional.)
+#10 - Pull in an image for the country from Pixabay API when the entered location brings up no results (good for obscure localities).
+#11 - Allow the user to remove the trip.
+##12 - Use Local Storage(opens in a new tab) to save the data so that when they close, then revisit the page, their information is still there.
+#12 - Add in services workers. Refer to project 4 for guidance.
 
 https://learn.udacity.com/nanodegrees/nd0011/parts/43c0edba-811f-4f64-86f8-9ba7a3f699c2/lessons/ls0431/concepts/5feb91b1-ada5-4727-80ed-3628111222ca?lesson_tab=lesson
 
