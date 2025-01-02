@@ -2,6 +2,26 @@
 <html>
   <head>
     <title>Travel App</title>
+    <meta charset="UTF-8" />
   </head>
-  <body></body>
+  <body>
+    <h1>Travel App</h1>
+    <hr />
+    <form action="/submit" method="post">
+      <label for="country">Country:</label>
+      <input
+        type="country"
+        id="city"
+        placeholder="enter Country name"
+        required
+      />
+
+      <label for="city">City:</label>
+      <input type="text" id="city" placeholder="enter City name" required />
+
+      <label for="departure-date">Departure date:</label>
+      <input type="date" id="departure-date" name="departure-date" required />
+    </form>
+    <hr />
+  </body>
 </html>
