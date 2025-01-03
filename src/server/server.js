@@ -4,6 +4,9 @@ projectData = {};
 // Require Express to run server and routes
 const express = require("express");
 
+// Start up an instance of app
+const app = express();
+
 /* Middleware*/
 //Here we are configuring express to use the built-in middle-ware.
 app.use(express.urlencoded({ extended: false }));
@@ -14,7 +17,7 @@ const cors = require("cors");
 app.use(cors());
 
 // Initialize the main project folder
-app.use(express.static("../src/client/"));
+app.use(express.static("dist"));
 
 // Setup Server
 app.listen(8080, function () {

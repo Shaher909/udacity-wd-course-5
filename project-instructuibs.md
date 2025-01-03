@@ -27,8 +27,17 @@ The following are just some of the questions that you’ll experience along the 
 ## Development Strategy
 
 #1 - Duplicate code from project #3 (as a starting point)
+-- -- install express and cors - OK
 #2 - Get webpack set up to work with this project
--- your stylesheets should be .scss files
+-- install webpack and its webpack-cli - OK
+-- install babel, babael-preset, babel-loader - OK
+-- Create babel config file - OK
+-- Create .js loader - OK
+-- Installed html-webpack-plugin - OK
+-- Installed CSS load & extraction plugins - OK
+-- Minifi css -
+-- Service workers -
+-- your stylesheets should be .scss files - OK
 -- server should access `dist` directory
 -- index.js should import the main function, and import your scss files.
 #3 - Setup `package.json` file with the necessary scripts to test, dev, start and build.
