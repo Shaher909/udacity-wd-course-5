@@ -14,6 +14,7 @@ export function handleSubmit() {
     postData("/submit", {
       city: data["city"],
       departureDate: data["departure-date"],
+      country: data["country"],
     });
   });
 

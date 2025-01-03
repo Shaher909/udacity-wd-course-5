@@ -4,7 +4,11 @@
   -- Input: city
   -- Output: latitude, longitude and country
   Docu: https://www.geonames.org/maps/addresses.html#geoCodeAddress
-  Example: http://api.geonames.org/geoCodeAddressJSON?q=Museumplein+6+amsterdam&username=demo
+  Example: http://api.geonames.org/geoCodeAddressJSON?q=paris&countryCode=FR&username=demo
+
+  For testing:
+
+  - Paris, FR: lat -> 48.82725, long -> 2.38332
 
 - Weatherbit API: for weather info
   -- Input: Latitude/longitude
