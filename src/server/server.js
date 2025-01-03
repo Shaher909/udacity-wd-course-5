@@ -6,6 +6,8 @@ const geoNamesApiBaseURL = "http://api.geonames.org/geoCodeAddressJSON?";
 const geoNamesApiUsername = "";
 const WeatherbitApiBaseURL = "https://api.weatherbit.io/v2.0/";
 const WeatherbitApiKey = "";
+const pixabayApiBaseURL = "https://pixabay.com/api/?";
+const pixabayApiKey = "";
 
 // Require Express to run server and routes
 const express = require("express");
@@ -42,7 +44,8 @@ app.post("/submit", function (req, res) {
   projectData = newRecord;
   console.log(projectData);
   //fetchGeoCoordinates(newRecord.country, newRecord.city, geoNamesApiBaseURL);
-  fetchWeatherData(2.38332, 48.82725);
+  //fetchWeatherData(2.38332, 48.82725);
+  //fetchImage("paris");
   res.send(projectData);
 });
 
@@ -68,17 +71,25 @@ const fetchWeatherData = async (longitude, latitude) => {
     `${WeatherbitApiBaseURL}current?lat=${latitude}&lon=${longitude}&key=${WeatherbitApiKey}`
   );
 
-  //https://api.weatherbit.io/v2.0/current?lat=35.7796&lon=-78.6382&key=API_KEY&include=minutely
-
-  console.log(
-    `${WeatherbitApiBaseURL}current?lat=${latitude}&lon=${longitude}&key=${WeatherbitApiKey}`
-  );
-
   try {
     const data = await request.json();
     weatherDescription = data.data[0].weather.description;
     weatherCurrentTemp = data.data[0].temp;
     //data.
+  } catch (error) {
+    console.log("Error: API connection failed, additional information:", error);
+  }
+};
+
+// Get request to fetch city image
+const fetchImage = async (cityName) => {
+  const request = await fetch(
+    `${pixabayApiBaseURL}key=${pixabayApiKey}&q=${cityName}&image_type=photo`
+  );
+
+  try {
+    const data = await request.json();
+    const imageURL = data.hits[0].webformatURL;
   } catch (error) {
     console.log("Error: API connection failed, additional information:", error);
   }
