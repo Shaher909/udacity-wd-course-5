@@ -3,7 +3,9 @@ projectData = {};
 
 // APIs credentials and endpoints
 const geoNamesApiBaseURL = "http://api.geonames.org/geoCodeAddressJSON?";
-const geoNamesApiUsername = "shaher909";
+const geoNamesApiUsername = "";
+const WeatherbitApiBaseURL = "https://api.weatherbit.io/v2.0/";
+const WeatherbitApiKey = "";
 
 // Require Express to run server and routes
 const express = require("express");
@@ -40,17 +42,43 @@ app.post("/submit", function (req, res) {
   projectData = newRecord;
   console.log(projectData);
   //fetchGeoCoordinates(newRecord.country, newRecord.city, geoNamesApiBaseURL);
+  fetchWeatherData(2.38332, 48.82725);
   res.send(projectData);
 });
 
-const fetchGeoCoordinates = async (country, city, url) => {
+// GET request to fetch the geo coordinates data
+const fetchGeoCoordinates = async (country, city) => {
   const request = await fetch(
-    `${url}q=${city}&countryCode=${country}&username=${geoNamesApiUsername}`
+    `${geoNamesApiBaseURL}q=${city}&countryCode=${country}&username=${geoNamesApiUsername}`
   );
 
   try {
     const data = await request.json();
-    return data;
+    const longitude = data.address.lng;
+    const latitude = data.address.lat;
+    console.log(longitude, " ", latitude);
+  } catch (error) {
+    console.log("Error: API connection failed, additional information:", error);
+  }
+};
+
+// Get request to fetch the weather data
+const fetchWeatherData = async (longitude, latitude) => {
+  const request = await fetch(
+    `${WeatherbitApiBaseURL}current?lat=${latitude}&lon=${longitude}&key=${WeatherbitApiKey}`
+  );
+
+  //https://api.weatherbit.io/v2.0/current?lat=35.7796&lon=-78.6382&key=API_KEY&include=minutely
+
+  console.log(
+    `${WeatherbitApiBaseURL}current?lat=${latitude}&lon=${longitude}&key=${WeatherbitApiKey}`
+  );
+
+  try {
+    const data = await request.json();
+    weatherDescription = data.data[0].weather.description;
+    weatherCurrentTemp = data.data[0].temp;
+    //data.
   } catch (error) {
     console.log("Error: API connection failed, additional information:", error);
   }
