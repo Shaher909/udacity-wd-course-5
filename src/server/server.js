@@ -36,21 +36,27 @@ app.listen(8080, function () {
 });
 
 // POST request to handle form submission
-app.post("/submit", function (req, res) {
-  newRecord = {
+app.post("/submit", async function (req, res) {
+  tripRecord = {
     city: req.body.city,
     departureDate: req.body.departureDate,
     country: req.body.country,
     whatever: "my additional data .. hehe",
   };
 
-  projectData = newRecord;
+  projectData = tripRecord;
   console.log(projectData);
-  //fetchGeoCoordinates(newRecord.country, newRecord.city, geoNamesApiBaseURL);
-  fetchWeatherData(2.38332, 48.82725, projectData.departureDate);
-  //fetchImage("paris");
+  fetchGeoCoordinates(
+    tripRecord.country,
+    tripRecord.city,
+    geoNamesApiBaseURL
+  ).then(({ longitude, latitude }) => {
+    fetchWeatherData(longitude, latitude, projectData.departureDate);
+  });
 
-  console.log();
+  // Fetch image data
+  const imageData = await fetchImage(tripRecord.city);
+
   res.send(projectData);
 });
 
@@ -64,7 +70,8 @@ const fetchGeoCoordinates = async (country, city) => {
     const data = await request.json();
     const longitude = data.address.lng;
     const latitude = data.address.lat;
-    console.log(longitude, " ", latitude);
+    console.log("Longitude: " + longitude + " Latitude: " + latitude);
+    return { longitude, latitude };
   } catch (error) {
     console.log("Error: API connection failed, additional information:", error);
   }
@@ -96,14 +103,12 @@ const fetchWeatherData = async (longitude, latitude, departureDate) => {
       weatherHighTemp = data?.data?.[0]?.high_temp ?? null;
       weatherLowTemp = data?.data?.[0]?.low_temp ?? null;
       console.log(
-        weatherDescription +
-          " High: " +
-          weatherHighTemp +
-          " Low: " +
-          weatherLowTemp
+        `${weatherType} : ${weatherDescription} High: ${weatherHighTemp} Low: ${weatherLowTemp}`
       );
     } else {
-      console.log(weatherDescription + " Temp: " + weatherCurrentTemp);
+      console.log(
+        `${weatherType} : ${weatherDescription} Temp: ${weatherCurrentTemp}`
+      );
     }
   } catch (error) {
     console.log("Error: API connection failed, additional information:", error);
@@ -118,7 +123,9 @@ const fetchImage = async (cityName) => {
 
   try {
     const data = await request.json();
-    const imageURL = data.hits[0].webformatURL;
+    const imageURL = data.hits?.[0]?.webformatURL ?? null;
+    console.log(imageURL);
+    return imageURL;
   } catch (error) {
     console.log("Error: API connection failed, additional information:", error);
   }
