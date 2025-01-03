@@ -11,6 +11,7 @@
     <form action="/submit" method="post">
       <label for="country">Country:</label>
       <input
+        name="country"
         type="text"
         id="country"
         placeholder="enter Country name"
@@ -18,12 +19,25 @@
       />
 
       <label for="city">City:</label>
-      <input type="text" id="city" placeholder="enter City name" required />
+      <input
+        name="city"
+        type="text"
+        id="city"
+        placeholder="enter City name"
+        required
+      />
 
       <label for="departure-date">Departure date:</label>
-      <input type="date" id="departure-date" name="departure-date" required />
+      <input
+        name="departure-date"
+        type="date"
+        id="departure-date"
+        name="departure-date"
+        required
+      />
 
       <button id="submitForm" type="submit">Submit</button>
+      <input name="test" value="test" onclick="return Client.test()" />
     </form>
     <hr />
   </body>

@@ -1,4 +1,5 @@
-document.addEventListener("DOMContentLoaded", function () {
+// function to handle the form submission and call the post request
+export function handleSubmit() {
   const form = document.querySelector("form");
 
   form.addEventListener("submit", function (event) {
@@ -9,11 +10,33 @@ document.addEventListener("DOMContentLoaded", function () {
     formData.forEach((value, key) => {
       data[key] = value;
     });
+
+    postData("/submit", {
+      city: data["city"],
+      departureDate: data["departure-date"],
+    });
   });
 
-  const queryString = new URLSearchParams(data).toString();
-  const url = `/result.html?${queryString}`;
+  //window.location.href = "/test";
+}
 
-  // Redirect the user to the result page
-  window.location.href = url;
-});
+// Async function to post the data to the server from the client side
+const postData = async (url, dataRecord) => {
+  const request = await fetch(url, {
+    method: "POST",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(dataRecord),
+  });
+
+  try {
+    const newData = await request.json();
+    console.log("post request is successful");
+    console.log(newData);
+    return newData;
+  } catch (error) {
+    console.log("Error", error);
+  }
+};

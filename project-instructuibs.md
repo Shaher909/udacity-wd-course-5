@@ -38,9 +38,9 @@ The following are just some of the questions that you’ll experience along the 
 -- Minifi css -
 -- Service workers -
 -- your stylesheets should be .scss files - OK
--- server should access `dist` directory
--- index.js should import the main function, and import your scss files.
-#3 - Setup `package.json` file with the necessary scripts to test, dev, start and build.
+-- server should access `dist` directory - OK
+-- index.js should import the main function, and import your scss files. - OK
+#3 - Setup `package.json` file with the necessary scripts to test, dev, start and build. - OK
 #4 - Create an account: https://www.geonames.org/export/web-services.html
 #5 - Replace the openweather api with geonames api
 #6 - Introduce a countdown.

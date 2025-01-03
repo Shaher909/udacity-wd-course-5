@@ -25,4 +25,14 @@ app.listen(8080, function () {
 });
 
 // POST request to handle form submission
-app.post("/submit", function (req, res) {});
+app.post("/submit", function (req, res) {
+  newRecord = {
+    city: req.body.city,
+    departureDate: req.body.departureDate,
+    whatever: "my additional data .. hehe",
+  };
+
+  projectData = newRecord;
+  console.log(projectData);
+  res.send(projectData);
+});
