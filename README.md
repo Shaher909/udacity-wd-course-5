@@ -24,8 +24,8 @@ npm run start
   [Weatherbit Forecast](https://api.weatherbit.io/v2.0/forecast/daily?lat=35.7796&lon=-78.6382&&key=API_KEY)
 
 - Pixabay API: for images
-  Docu: [Pixabay Docu](https://pixabay.com/api/docs/)
-  Example: [Pixabay Example](https://pixabay.com/api/?key=47992973-c3889de341fa774b7d6882113&q=yellow+flowers&image_type=photo)
+  [Pixabay Docu](https://pixabay.com/api/docs/)
+  [Pixabay Example](https://pixabay.com/api/?key=47992973-c3889de341fa774b7d6882113&q=yellow+flowers&image_type=photo)
 
 ## Architecture & decisions
 
