@@ -36,6 +36,7 @@ npm run start
 
 - Ability to select a country, type a city and date and lookup the weather forecast based on that
 - The server looks up the Geo coordinates, weather and media APIs to return the necessary results to the user
+- Information / result from a user request is saved into the browser local storage and loaded accordingly when accessing the site, until the trip is removed
 - Remove trip: removes the trip info from the page (clear HTML elements) and removes the info from local storage.
 - Standard validation to avoid faulty input (ex: no date in the past is allowed, when dummy city is added an error message is displayed).
 
