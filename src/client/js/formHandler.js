@@ -60,6 +60,10 @@ function clearValidationErrors() {
 }
 
 function renderInfoToHtml(tripInfo) {
+  //# trip-destination-img --> image
+  const tripDestinationImg = document.getElementById("trip-destination-img");
+  tripDestinationImg.src = tripInfo.imageURL;
+
   //# trip-destination -> My trip to: x, y departing on 9999/1/1
   const tripDestinationSpan = document.getElementById("trip-destination");
   tripDestinationSpan.innerText = `My trip to ${tripInfo.city} is on: ${tripInfo.departureDate}`;
