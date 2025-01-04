@@ -43,21 +43,29 @@ app.post("/submit", async function (req, res) {
     country: req.body.country,
   };
 
-  const { longitude, latitude } = await fetchGeoCoordinates(tripRecord.country, tripRecord.city);
-  const weatherData = await fetchWeatherData(longitude, latitude, tripRecord.departureDate);
-  const imageURL = await fetchImage(tripRecord.city); 
-  const daysRemaining = calculateRemainingDays(tripRecord.departureDate, currentServerDate);
+  try{
+      //Chain of functions to fetch all the necessary details
+      const { longitude, latitude } = await fetchGeoCoordinates(tripRecord.country, tripRecord.city);
+      const weatherData = await fetchWeatherData(longitude, latitude, tripRecord.departureDate);
+      const imageURL = await fetchImage(tripRecord.city); 
+      const daysRemaining = calculateRemainingDays(tripRecord.departureDate, currentServerDate);
 
-  //Construct the ojbect with full data to be sent to the client
-  projectData = {
-    ...tripRecord,
-    ...weatherData,
-    imageURL: imageURL, 
-    daysCount: daysRemaining
-  };
+      //Construct the ojbect with full data to be sent to the client
+      projectData = {
+        ...tripRecord,
+        ...weatherData,
+        imageURL: imageURL, 
+        daysCount: daysRemaining
+      };
 
-  console.log(projectData);
-  res.send(projectData);
+      console.log(projectData);
+      res.send(projectData);
+  }catch(e){
+    console.log("Something went wrong in the information fetching, check logs for more details" + e)
+    const errorResponse = { faultyEntry: "Info can't be retrieved, please check if the city is valid for the country", error: e}
+    res.send(errorResponse);
+  }
+  
 });
 
 // GET request to fetch the geo coordinates data
@@ -73,7 +81,7 @@ const fetchGeoCoordinates = async (country, city) => {
     console.log("Longitude: " + longitude + " Latitude: " + latitude);
     return { longitude, latitude };
   } catch (error) {
-    console.log("Error: API connection failed, additional information:", error);
+    console.log("Error: GeoNames API connection failed, additional information:", error);
   }
 };
 
@@ -123,7 +131,7 @@ const fetchWeatherData = async (longitude, latitude, departureDate) => {
     };
 
   } catch (error) {
-    console.log("Error: API connection failed, additional information:", error);
+    console.log("Error: Weather Info API connection failed, additional information:", error);
   }
 };
 
@@ -139,7 +147,7 @@ const fetchImage = async (cityName) => {
     console.log(imageURL);
     return imageURL;
   } catch (error) {
-    console.log("Error: API connection failed, additional information:", error);
+    console.log("Error: pixabay API connection failed, additional information:", error);
   }
 };
 
