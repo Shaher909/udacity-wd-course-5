@@ -86,4 +86,8 @@ function showTripResultDiv() {
   //Include the remove button function into the button inside the trip result div
   const removeTripBtn = document.getElementById("remove-trip");
   removeTripBtn.addEventListener("click", removeTrip);
+
+  //Hide the trip form div
+  const tripFormDiv = document.getElementById("trip-form");
+  tripFormDiv.classList.add("hidden");
 }
