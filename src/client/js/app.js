@@ -14,3 +14,11 @@ function dateInputValidation() {
 }
 
 dateInputValidation();
+
+//Trip removal logic: remove trip from local storage and hide the trip div.
+export function removeTrip() {
+  alert("button clicked");
+  localStorage.removeItem("tripInfo");
+  const tripResultDiv = document.getElementById("trip-info");
+  tripResultDiv.classList.add("hidden");
+}

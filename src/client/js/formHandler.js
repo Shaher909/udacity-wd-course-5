@@ -1,3 +1,5 @@
+import { removeTrip } from "./app";
+
 // function to handle the form submission and call the post request
 export function handleSubmit() {
   const form = document.querySelector("form");
@@ -18,8 +20,6 @@ export function handleSubmit() {
       country: data["country"],
     });
   });
-
-  //window.location.href = "/test";
 }
 
 // Async function to post the data to the server from the client side
@@ -35,18 +35,14 @@ const postData = async (url, dataRecord) => {
 
   try {
     const newData = await request.json();
-    console.log("post request is successful");
-    console.log(newData);
     if (newData.faultyEntry) {
       displayNoResultsValidation();
       return;
     }
 
-    console.log("post request is successful");
-    renderInfoToHtml(newData);
-    //store the data in browser's local storage for further handling (better UX and display of info on next page)
-    localStorage.setItem("tripInfo", JSON.stringify(newData));
-    console.log(newData);
+    showTripResultDiv();
+    renderInfoToHtml(newData); //render the response data to HTML elements
+    localStorage.setItem("tripInfo", JSON.stringify(newData)); //store the data in browser's local storage for further handling (better UX and display of info on next page)
   } catch (error) {
     console.log("Error", error);
   }
@@ -80,4 +76,14 @@ function renderInfoToHtml(tripInfo) {
   }
 
   tripWeather.innerText = weatherText;
+}
+
+// Display the trip result div
+function showTripResultDiv() {
+  const tripResultDiv = document.getElementById("trip-info");
+  tripResultDiv.classList.remove("hidden");
+
+  //Include the remove button function into the button inside the trip result div
+  const removeTripBtn = document.getElementById("remove-trip");
+  removeTripBtn.addEventListener("click", removeTrip);
 }
