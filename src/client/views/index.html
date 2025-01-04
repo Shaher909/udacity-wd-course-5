@@ -4,14 +4,16 @@
 <head>
   <title>Travel Planner</title>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
   <div id="app-container">
     <header>
       <h1>Travel Planner</h1>
+      <hr />
     </header>
-    <hr />
+
     <div id="trip-form">
       <h2>Enter your trip details:</h2>
 
@@ -51,21 +53,25 @@
         <br />
         <span id="validation-error" class="error"></span>
       </form>
+      <hr />
     </div>
-    <hr />
+
     <div id="trip-info">
-      <h2>Trip Information:</h2>
       <img src="no-image.svg" alt="no image" />
-      <span id="trip-destination"> My trip to: x, y departing on 9999/1/1</span>
+      <div id="trip-info-text">
+        <h2>Trip Info:</h2>
+        <span id="trip-destination"> My trip to: x, y departing on 9999/1/1</span>
+        <span id="trip-countdown">x,y is 999 days away</span>
+        <span id="weather-info">
+          The weather is: bla blah, tempretature: 2
+        </span>
+        <p id="trip-info"></p>
+      </div>
       <button id="save-trip">Save Trip</button>
       <button id="save-trip">Remove Trip</button>
-      <span id="trip-countdown">x,y is 999 days away</span>
-      <span id="weather-info">
-        The weather is: bla blah, tempretature: 2
-      </span>
-      <p id="trip-info"></p>
+      <hr />
     </div>
-    <hr />
+
     <footer>
       <p>
         &copy; Shaher Jamal Eddin for Udacity Course - 2025

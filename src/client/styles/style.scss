@@ -1,3 +1,15 @@
+#app-container {
+  display: grid;
+  grid-template-columns: 80vw;
+  grid-template-rows: auto auto auto auto;
+  grid-gap: 15px;
+  justify-content: center;
+}
+
+#app-container > * {
+  border: 1px solid orange;
+}
+
 body {
   background-color: rgb(121, 165, 242);
 }
@@ -6,20 +18,49 @@ body {
   color: red;
 }
 
-header,
-footer {
-  border: 1px solid red;
-}
-
 #trip-form {
-  border: 1px solid green;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 #trip-info {
-  border: 1px solid blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   img {
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
+  }
+
+  #trip-info-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (min-width: 920px) {
+  /* css rules that apply when the minimum width of the screen is 700 pixels */
+  #trip-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100%;
+
+    img {
+      width: 200px;
+      height: 200px;
+    }
+  }
+
+  #trip-info > * {
+    border: 1px solid red;
   }
 }
