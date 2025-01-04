@@ -3,11 +3,11 @@ projectData = {};
 
 // APIs credentials and endpoints
 const geoNamesApiBaseURL = "http://api.geonames.org/geoCodeAddressJSON?";
-const geoNamesApiUsername = "";
+const geoNamesApiUsername = "shaher909";
 const WeatherbitApiBaseURL = "https://api.weatherbit.io/v2.0/";
-const WeatherbitApiKey = "";
+const WeatherbitApiKey = "d56001bd3a5e487abd8f79351053d510";
 const pixabayApiBaseURL = "https://pixabay.com/api/?";
-const pixabayApiKey = "";
+const pixabayApiKey = "47992973-c3889de341fa774b7d6882113";
 
 // Require Express to run server and routes
 const express = require("express");
@@ -37,26 +37,26 @@ app.listen(8080, function () {
 
 // POST request to handle form submission
 app.post("/submit", async function (req, res) {
-  tripRecord = {
+  const tripRecord = {
     city: req.body.city,
     departureDate: req.body.departureDate,
     country: req.body.country,
-    whatever: "my additional data .. hehe",
   };
 
-  projectData = tripRecord;
+  const { longitude, latitude } = await fetchGeoCoordinates(tripRecord.country, tripRecord.city);
+  const weatherData = await fetchWeatherData(longitude, latitude, tripRecord.departureDate);
+  const imageURL = await fetchImage(tripRecord.city); 
+  const daysRemaining = calculateRemainingDays(tripRecord.departureDate, currentServerDate);
+
+  //Construct the ojbect with full data to be sent to the client
+  projectData = {
+    ...tripRecord,
+    ...weatherData,
+    imageURL: imageURL, 
+    daysCount: daysRemaining
+  };
+
   console.log(projectData);
-  fetchGeoCoordinates(
-    tripRecord.country,
-    tripRecord.city,
-    geoNamesApiBaseURL
-  ).then(({ longitude, latitude }) => {
-    fetchWeatherData(longitude, latitude, projectData.departureDate);
-  });
-
-  // Fetch image data
-  const imageData = await fetchImage(tripRecord.city);
-
   res.send(projectData);
 });
 
@@ -97,8 +97,11 @@ const fetchWeatherData = async (longitude, latitude, departureDate) => {
 
   try {
     const data = await request.json();
-    weatherDescription = data.data[0].weather.description;
-    weatherCurrentTemp = data.data[0].temp;
+    const weatherDescription = data.data[0].weather.description;
+    const weatherTemp = data.data[0].temp;
+    let weatherHighTemp = null;  
+    let weatherLowTemp = null;   
+
     if (weatherType === "forecast") {
       weatherHighTemp = data?.data?.[0]?.high_temp ?? null;
       weatherLowTemp = data?.data?.[0]?.low_temp ?? null;
@@ -107,9 +110,18 @@ const fetchWeatherData = async (longitude, latitude, departureDate) => {
       );
     } else {
       console.log(
-        `${weatherType} : ${weatherDescription} Temp: ${weatherCurrentTemp}`
+        `${weatherType} : ${weatherDescription} Temp: ${weatherTemp}`
       );
     }
+
+    return { 
+      weatherType, 
+      weatherDescription, 
+      weatherTemp, 
+      weatherHighTemp,  
+      weatherLowTemp    
+    };
+
   } catch (error) {
     console.log("Error: API connection failed, additional information:", error);
   }
