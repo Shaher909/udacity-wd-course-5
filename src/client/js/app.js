@@ -1,3 +1,5 @@
+import { renderInfoToHtml, showTripResultDiv } from "./formHandler";
+
 // Client side validation to having a valid date
 function dateInputValidation() {
   const dateInput = document.getElementById("departure-date");
@@ -37,3 +39,15 @@ export function removeTrip() {
   const tripFormDiv = document.getElementById("trip-form");
   tripFormDiv.classList.remove("hidden");
 }
+
+function loadDataFromStorageForReturningCustomers() {
+  const storedTripInfo = localStorage.getItem("tripInfo");
+  // Check if tripInfo exists in local storage
+  if (storedTripInfo) {
+    const tripInfo = JSON.parse(storedTripInfo); // Parse the JSON string
+    renderInfoToHtml(tripInfo);
+    showTripResultDiv(); // Show the trip info and hide the form
+  }
+}
+
+loadDataFromStorageForReturningCustomers();

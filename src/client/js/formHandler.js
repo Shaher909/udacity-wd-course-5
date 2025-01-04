@@ -59,7 +59,7 @@ function clearValidationErrors() {
   errorSpan.innerText = "";
 }
 
-function renderInfoToHtml(tripInfo) {
+export function renderInfoToHtml(tripInfo) {
   //# trip-destination-img --> image
   const tripDestinationImg = document.getElementById("trip-destination-img");
   tripDestinationImg.src = tripInfo.imageURL;
@@ -83,7 +83,7 @@ function renderInfoToHtml(tripInfo) {
 }
 
 // Display the trip result div
-function showTripResultDiv() {
+export function showTripResultDiv() {
   const tripResultDiv = document.getElementById("trip-info");
   tripResultDiv.classList.remove("hidden");
 
