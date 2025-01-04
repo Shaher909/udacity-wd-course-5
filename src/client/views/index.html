@@ -7,7 +7,7 @@
   <body>
     <h1>Travel App</h1>
     <hr />
-    <h2>Enter your tip details</h2>
+    <h2>Enter your trip details</h2>
     <form action="/submit" method="post">
       <label for="country">Country:</label>
       <select name="country" id="country" required>
@@ -63,6 +63,8 @@
 
       <button id="submitForm" type="submit">Submit</button>
       <input name="test" value="test" onclick="return Client.test()" />
+      <br />
+      <span id="validation-error" class="error"></span>
     </form>
     <hr />
   </body>

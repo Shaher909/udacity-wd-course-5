@@ -4,7 +4,8 @@ export function handleSubmit() {
 
   form.addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent the default form submission
-
+    clearValidationErrors();
+    
     const formData = new FormData(form);
     const data = {};
     formData.forEach((value, key) => {
@@ -36,8 +37,21 @@ const postData = async (url, dataRecord) => {
     const newData = await request.json();
     console.log("post request is successful");
     console.log(newData);
+    if(newData.faultyEntry){
+      displayNoResultsValidation();
+    }
     return newData;
   } catch (error) {
     console.log("Error", error);
   }
 };
+
+function displayNoResultsValidation(){
+  const errorSpan = document.getElementById("validation-error");
+  errorSpan.innerText = "There was no valid results, please check your city and country input. If they are valid there could be a system interruption at the moment";
+}
+
+function clearValidationErrors(){
+  const errorSpan = document.getElementById("validation-error");
+  errorSpan.innerText = "";
+}
