@@ -37,35 +37,47 @@ const postData = async (url, dataRecord) => {
     const newData = await request.json();
     console.log("post request is successful");
     console.log(newData);
-    if(newData.faultyEntry){
+    if (newData.faultyEntry) {
       displayNoResultsValidation();
       return;
     }
 
     console.log("post request is successful");
-    renderInfoToHtml(newData)
+    renderInfoToHtml(newData);
     //store the data in browser's local storage for further handling (better UX and display of info on next page)
-    localStorage.setItem('tripInfo', JSON.stringify(newData));
+    localStorage.setItem("tripInfo", JSON.stringify(newData));
     console.log(newData);
-
   } catch (error) {
     console.log("Error", error);
   }
 };
 
-function displayNoResultsValidation(){
+function displayNoResultsValidation() {
   const errorSpan = document.getElementById("validation-error");
-  errorSpan.innerText = "There was no valid results, please check your city and country input. If they are valid there could be a system interruption at the moment";
+  errorSpan.innerText =
+    "There was no valid results, please check your city and country input. If they are valid there could be a system interruption at the moment";
 }
 
-function clearValidationErrors(){
+function clearValidationErrors() {
   const errorSpan = document.getElementById("validation-error");
   errorSpan.innerText = "";
 }
 
-function renderInfoToHtml(tripInfo){
+function renderInfoToHtml(tripInfo) {
+  //# trip-destination -> My trip to: x, y departing on 9999/1/1
+  const tripDestinationSpan = document.getElementById("trip-destination");
+  tripDestinationSpan.innerText = `My trip to ${tripInfo.city} is on: ${tripInfo.departureDate}`;
 
-  const infoDetailsParagraph = document.getElementById("trip-info");
-  infoDetailsParagraph.innerText = `My trip to ${tripInfo.city} is on ${tripInfo.departureDate}`
+  //# trip-countdown -> x,y is 999 days away
+  const tripRemainingDays = document.getElementById("trip-countdown");
+  tripRemainingDays.innerText = `${tripInfo.city} trip is ${tripInfo.daysCount} days away`;
 
+  //# weather-info -> The weather is: bla blah, tempretature: 2
+  const tripWeather = document.getElementById("weather-info");
+  let weatherText = `The ${tripInfo.weatherType} weather is ${tripInfo.weatherDescription} with a temperature of ${tripInfo.weatherTemp}`;
+  if (tripInfo.weatherLowTemp && tripInfo.weatherHighTemp) {
+    weatherText += ` (low: ${tripInfo.weatherLowTemp}, high: ${tripInfo.weatherHighTemp})`;
+  }
+
+  tripWeather.innerText = weatherText;
 }
