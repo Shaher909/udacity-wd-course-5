@@ -5,7 +5,7 @@ export function handleSubmit() {
   form.addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent the default form submission
     clearValidationErrors();
-    
+
     const formData = new FormData(form);
     const data = {};
     formData.forEach((value, key) => {
@@ -39,8 +39,15 @@ const postData = async (url, dataRecord) => {
     console.log(newData);
     if(newData.faultyEntry){
       displayNoResultsValidation();
+      return;
     }
-    return newData;
+
+    console.log("post request is successful");
+    renderInfoToHtml(newData)
+    //store the data in browser's local storage for further handling (better UX and display of info on next page)
+    localStorage.setItem('tripInfo', JSON.stringify(newData));
+    console.log(newData);
+
   } catch (error) {
     console.log("Error", error);
   }
@@ -54,4 +61,11 @@ function displayNoResultsValidation(){
 function clearValidationErrors(){
   const errorSpan = document.getElementById("validation-error");
   errorSpan.innerText = "";
+}
+
+function renderInfoToHtml(tripInfo){
+
+  const infoDetailsParagraph = document.getElementById("trip-info");
+  infoDetailsParagraph.innerText = `My trip to ${tripInfo.city} is on ${tripInfo.departureDate}`
+
 }

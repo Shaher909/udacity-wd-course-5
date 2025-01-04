@@ -45,8 +45,8 @@ The following are just some of the questions that you’ll experience along the 
 #5 - Replace the openweather api with geonames api - OK
 #6 - Introduce a countdown.
 -- What type of input should it be? What about cross browser rendering?
--- We’re looking to see how soon the trip is, how can you get the information from the DOM and see how soon that date is?
--- Where should you be storing that data once you have it?
+-- We’re looking to see how soon the trip is, how can you get the information from the DOM and see how soon that date is? - OK
+-- Where should you be storing that data once you have it? - OK
 -- if the tip is within a week, you will get the current weather forecast. If the trip is in the future, you will get a predicted forecast.
 #7 - Create an account: https://www.weatherbit.io/account/create - OK
 #8 - Integrate the Weatherbit API similarly to how you integrated the geoname api. - OK
