@@ -1,10 +1,10 @@
 import { removeTrip } from "./app";
 
 // function to handle the form submission and call the post request
-export function handleSubmit() {
+export const handleSubmit = () => {
   const form = document.querySelector("form");
 
-  form.addEventListener("submit", function (event) {
+  form.addEventListener("submit", (event) => {
     event.preventDefault(); // Prevent the default form submission
     clearValidationErrors();
 
@@ -20,7 +20,7 @@ export function handleSubmit() {
       country: data["country"],
     });
   });
-}
+};
 
 // Async function to post the data to the server from the client side
 const postData = async (url, dataRecord) => {
@@ -48,18 +48,18 @@ const postData = async (url, dataRecord) => {
   }
 };
 
-function displayNoResultsValidation() {
+const displayNoResultsValidation = () => {
   const errorSpan = document.getElementById("validation-error");
   errorSpan.innerText =
     "There was no valid results, please check your city and country input. If they are valid there could be a system interruption at the moment";
-}
+};
 
-function clearValidationErrors() {
+const clearValidationErrors = () => {
   const errorSpan = document.getElementById("validation-error");
   errorSpan.innerText = "";
-}
+};
 
-export function renderInfoToHtml(tripInfo) {
+export const renderInfoToHtml = (tripInfo) => {
   //# trip-destination-img --> image
   const tripDestinationImg = document.getElementById("trip-destination-img");
   tripDestinationImg.src = tripInfo.imageURL;
@@ -80,10 +80,10 @@ export function renderInfoToHtml(tripInfo) {
   }
 
   tripWeather.innerText = weatherText;
-}
+};
 
 // Display the trip result div
-export function showTripResultDiv() {
+export const showTripResultDiv = () => {
   const tripResultDiv = document.getElementById("trip-info");
   tripResultDiv.classList.remove("hidden");
 
@@ -94,4 +94,4 @@ export function showTripResultDiv() {
   //Hide the trip form div
   const tripFormDiv = document.getElementById("trip-form");
   tripFormDiv.classList.add("hidden");
-}
+};

@@ -1,7 +1,7 @@
 import { renderInfoToHtml, showTripResultDiv } from "./formHandler";
 
 // Client side validation to having a valid date
-function dateInputValidation() {
+const dateInputValidation = () => {
   const dateInput = document.getElementById("departure-date");
 
   dateInput.addEventListener("change", () => {
@@ -13,12 +13,12 @@ function dateInputValidation() {
       dateInput.value = "";
     }
   });
-}
+};
 
 dateInputValidation();
 
 //Trip removal logic: remove trip from local storage and hide the trip div.
-export function removeTrip() {
+export const removeTrip = () => {
   localStorage.removeItem("tripInfo");
 
   //Clear spans content from previous trip details
@@ -38,9 +38,9 @@ export function removeTrip() {
   //Show the trip form div
   const tripFormDiv = document.getElementById("trip-form");
   tripFormDiv.classList.remove("hidden");
-}
+};
 
-function loadDataFromStorageForReturningCustomers() {
+const loadDataFromStorageForReturningCustomers = () => {
   const storedTripInfo = localStorage.getItem("tripInfo");
   // Check if tripInfo exists in local storage
   if (storedTripInfo) {
@@ -48,6 +48,6 @@ function loadDataFromStorageForReturningCustomers() {
     renderInfoToHtml(tripInfo);
     showTripResultDiv(); // Show the trip info and hide the form
   }
-}
+};
 
 loadDataFromStorageForReturningCustomers();
