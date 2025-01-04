@@ -1,3 +1,18 @@
+## Installation
+
+To get started, run
+
+```
+npm install
+```
+
+To build and start the application:
+
+```
+npm run build
+npm run start
+```
+
 ## API connections
 
 - GeoNames API: for location info
