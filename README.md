@@ -31,6 +31,8 @@ npm run start
 
 - For better accuarcy and to avoid default behavior which may select unwanted country, a country selector is introduced, as some city names may exist in different countries.
 - The application support specific countries only, this is due to the limitation of the geoNames API, only supported countries are listed in the drop down option.
+- Older version of "node-fetch" is used, due to specific compatibility issues.
+- jsdom is used as a test env. due to the need to mocking the DOM elements in the Client side test use cases
 
 ## Main features:
 
@@ -39,7 +41,14 @@ npm run start
 - Information / result from a user request is saved into the browser local storage and loaded accordingly when accessing the site, until the trip is removed
 - Remove trip: removes the trip info from the page (clear HTML elements) and removes the info from local storage.
 - Standard validation to avoid faulty input (ex: no date in the past is allowed, when dummy city is added an error message is displayed).
+- 2 Jest tests for a server and client javascript functions
 
 ## Test data
 
 - Paris, FR: lat -> 48.82725, long -> 2.38332
+
+Automated tests can be run via:
+
+```
+npm run test
+```
