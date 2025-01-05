@@ -1,6 +1,6 @@
 import { renderInfoToHtml, showTripResultDiv } from "./formHandler";
 
-// Client side validation to having a valid date
+//Client side validation to having a valid date
 const dateInputValidation = () => {
   const dateInput = document.getElementById("departure-date");
 

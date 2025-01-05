@@ -1,0 +1,45 @@
+import { renderInfoToHtml } from "./formHandler";
+
+describe("renderInfoToHtml", () => {
+  beforeEach(() => {
+    // Set up a mock DOM structure
+    document.body.innerHTML = `
+      <img id="trip-destination-img" />
+      <span id="trip-destination"></span>
+      <span id="trip-countdown"></span>
+      <span id="weather-info"></span>
+    `;
+  });
+
+  it("should render trip information to the HTML elements", () => {
+    // Mock trip data
+    const tripInfo = {
+      imageURL: "https://example.com/image.jpg",
+      city: "Paris",
+      departureDate: "2025-01-15",
+      daysCount: 10,
+      weatherType: "sunny",
+      weatherDescription: "clear skies",
+      weatherTemp: "20°C",
+      weatherLowTemp: "15°C",
+      weatherHighTemp: "25°C",
+    };
+
+    // Call the function
+    renderInfoToHtml(tripInfo);
+
+    // Assertions
+    expect(document.getElementById("trip-destination-img").src).toBe(
+      tripInfo.imageURL
+    );
+    expect(document.getElementById("trip-destination").innerText).toBe(
+      `My trip to Paris is on: 2025-01-15`
+    );
+    expect(document.getElementById("trip-countdown").innerText).toBe(
+      `Paris trip is 10 days away`
+    );
+    expect(document.getElementById("weather-info").innerText).toBe(
+      `The sunny weather is clear skies with a temperature of 20°C (low: 15°C, high: 25°C)`
+    );
+  });
+});

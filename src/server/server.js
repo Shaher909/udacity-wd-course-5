@@ -1,6 +1,9 @@
 // Setup empty JS object to act as endpoint for all routes
 let projectData = {};
 
+const fetch = require("node-fetch");
+global.fetch = fetch;
+
 // APIs credentials and endpoints
 const geoNamesApiBaseURL = "http://api.geonames.org/geoCodeAddressJSON?";
 const geoNamesApiUsername = "shaher909";
@@ -30,10 +33,17 @@ app.use(cors());
 // Initialize the main project folder
 app.use(express.static("dist"));
 
-// Setup Server
-app.listen(8080, () => {
-  console.log("Example app listening on port 8080!");
-});
+// Setup Server & start it when executed only
+const startServer = () => {
+  app.listen(8080, () => {
+    console.log("Example app listening on port 8080!");
+  });
+};
+
+// Only start the server if this file is executed directly (not imported in a test)
+if (require.main === module) {
+  startServer();
+}
 
 // POST request to handle form submission
 app.post("/submit", async function (req, res) {
@@ -185,4 +195,4 @@ const calculateRemainingDays = (departureDate, currentDate) => {
   return dayDifference;
 };
 
-module.exports = { fetchGeoCoordinates };
+module.exports = { app, fetchGeoCoordinates };
