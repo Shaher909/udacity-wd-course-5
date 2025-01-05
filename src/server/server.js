@@ -1,5 +1,5 @@
 // Setup empty JS object to act as endpoint for all routes
-projectData = {};
+let projectData = {};
 
 // APIs credentials and endpoints
 const geoNamesApiBaseURL = "http://api.geonames.org/geoCodeAddressJSON?";
@@ -184,3 +184,5 @@ const calculateRemainingDays = (departureDate, currentDate) => {
 
   return dayDifference;
 };
+
+module.exports = { fetchGeoCoordinates };
