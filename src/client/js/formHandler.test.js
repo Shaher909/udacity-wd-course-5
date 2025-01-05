@@ -1,5 +1,9 @@
 import { renderInfoToHtml } from "./formHandler";
 
+jest.mock("./app", () => ({
+  removeTrip: jest.fn(),
+}));
+
 describe("renderInfoToHtml", () => {
   beforeEach(() => {
     // Set up a mock DOM structure
@@ -14,15 +18,16 @@ describe("renderInfoToHtml", () => {
   it("should render trip information to the HTML elements", () => {
     // Mock trip data
     const tripInfo = {
-      imageURL: "https://example.com/image.jpg",
+      imageURL:
+        "https://github.com/Shaher909/udacity-wd-course-5/tree/main/src/client/images/no-image.svg",
       city: "Paris",
       departureDate: "2025-01-15",
       daysCount: 10,
-      weatherType: "sunny",
+      weatherType: "forecast",
       weatherDescription: "clear skies",
-      weatherTemp: "20°C",
-      weatherLowTemp: "15°C",
-      weatherHighTemp: "25°C",
+      weatherTemp: "20",
+      weatherLowTemp: "15",
+      weatherHighTemp: "25",
     };
 
     // Call the function
@@ -39,7 +44,7 @@ describe("renderInfoToHtml", () => {
       `Paris trip is 10 days away`
     );
     expect(document.getElementById("weather-info").innerText).toBe(
-      `The sunny weather is clear skies with a temperature of 20°C (low: 15°C, high: 25°C)`
+      `The forecast weather is clear skies with a temperature of 20 (low: 15, high: 25)`
     );
   });
 });
