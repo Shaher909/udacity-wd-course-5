@@ -42,7 +42,7 @@ const postData = async (url, dataRecord) => {
 
     showTripResultDiv();
     renderInfoToHtml(newData); //render the response data to HTML elements
-    localStorage.setItem("tripInfo", JSON.stringify(newData)); //store the data in browser's local storage for further handling (better UX and display of info on next page)
+    writeInfoToLocalStorage(newData); //store the data in browser's local storage for further handling
   } catch (error) {
     console.log("Error", error);
   }
@@ -94,4 +94,8 @@ export const showTripResultDiv = () => {
   //Hide the trip form div
   const tripFormDiv = document.getElementById("trip-form");
   tripFormDiv.classList.add("hidden");
+};
+
+export const writeInfoToLocalStorage = (newData) => {
+  localStorage.setItem("tripInfo", JSON.stringify(newData));
 };
