@@ -6,11 +6,11 @@ global.fetch = fetch;
 
 // APIs credentials and endpoints
 const geoNamesApiBaseURL = "http://api.geonames.org/geoCodeAddressJSON?";
-const geoNamesApiUsername = "shaher909";
+const geoNamesApiUsername = "";
 const WeatherbitApiBaseURL = "https://api.weatherbit.io/v2.0/";
-const WeatherbitApiKey = "d56001bd3a5e487abd8f79351053d510";
+const WeatherbitApiKey = "";
 const pixabayApiBaseURL = "https://pixabay.com/api/?";
-const pixabayApiKey = "47992973-c3889de341fa774b7d6882113";
+const pixabayApiKey = "";
 
 // Require Express to run server and routes
 const express = require("express");
@@ -82,7 +82,7 @@ app.post("/submit", async function (req, res) {
     res.send(projectData);
   } catch (e) {
     console.log(
-      "Something went wrong in the information fetching, check logs for more details" +
+      "Something went wrong in the information fetching, check logs for more details: ensure your API keys are valid & working" +
         e
     );
     const errorResponse = {
